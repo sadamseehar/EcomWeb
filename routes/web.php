@@ -6,6 +6,8 @@ use App\Http\Controllers\productController;
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\testController;
 use App\Http\Controllers\testResourceController;
+use App\Http\Controllers\userController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -134,3 +136,16 @@ route::get('mainWeb',function()
 
 
 route::get('mainHome',[testController::class,'index']);
+
+
+
+
+
+
+route::get('userRegister',[userController::class,'register']);
+
+
+route::post('userRegisterPost',[userController::class,'registerPost']);
+route::get('userLogin',[userController::class,'login']);
+
+route::post('loginPost',[userController::class,'loginPost']);
