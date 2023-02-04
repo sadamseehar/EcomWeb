@@ -4,6 +4,10 @@
 
 @section("master")
 <!-- Banner Section Begin -->
+
+{{session('username')}}
+
+<a class="btn btn-danger" href="/logout">logout</a>
 <div class="banner-section spad">
         <div class="container-fluid">
             <div class="row">

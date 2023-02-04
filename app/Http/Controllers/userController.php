@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\models\User;
 use Illuminate\facades\hash;
+use Illuminate\Support\Facades\Auth;
+use DB;
+
+use App\models\car; 
 
 class userController extends Controller
 {
@@ -46,13 +50,34 @@ class userController extends Controller
                 'email'=>'required|email',
                 'password'=>'required|min:8',
             ]);
+            
+  
+         $email = $request->email;
+         $password = $request->password;
 
-            $user = user::where(['name'=>$request->email , 'password'=>$request->password]);
 
-            // if(\Auth::attempt($request->only('email','password')))
-            // {
-            //     return view("main.home");
-            // }
-            return redirect()->back()->with('error','invalid credentials');
+        $login = DB::table("users")->select('name')->where(['email'=>$email,'password'=>$password])->first();
+
+       
+         
+         if($login)
+         {
+            $car = car::all();
+             session(["username"=>$login->name]);
+             return View("main.home",compact('car'));
+         }
+         else
+         {
+            return redirect()->back()->with("error","Data not found");
+
+         }
+        }
+
+
+        function logout()
+        {
+            session()->forget('username');
+            
+            return view("main.login");
         }
 }

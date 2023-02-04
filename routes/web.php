@@ -149,3 +149,4 @@ route::post('userRegisterPost',[userController::class,'registerPost']);
 route::get('userLogin',[userController::class,'login']);
 
 route::post('loginPost',[userController::class,'loginPost']);
+route::get('/logout',[userController::class,'logout']);
