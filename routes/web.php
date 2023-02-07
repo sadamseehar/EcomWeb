@@ -51,37 +51,21 @@ route::get('layout',function(){
     return view('adminPages.layout');
 });
 
-route::get('user',function(){
-
-    return view('adminPages.addUser');
-});
-
 
 
 route::get('userFetch',[testController::class,'userFetchFunc']);
 
 
-route::get('addProduct',[productController::class,'product']);
 
-route::post('addUserPost',[testController::class,'addUserFunc']);
 
 route::get('delete/{id}',[testController::class,'delete']);
 
 route::get('edit/{id}',[testController::class,'edit']);
+// route::get('addProduct',[productController::class,'product']);
 
 route::post('updateUserPost',[testController::class,'update']);
 
-
-
-
-
-
-
-
-
-
-
-route::post('addProductPost',[productController::class,'addProductFunction']);
+// route::post('addProductPost',[productController::class,'addProductFunction']);
 
 
 route::get('userData',[testController::class,'userData']);
@@ -150,3 +134,26 @@ route::get('userLogin',[userController::class,'login']);
 
 route::post('loginPost',[userController::class,'loginPost']);
 route::get('/logout',[userController::class,'logout']);
+
+
+
+Route::group(['middleware'=>'admin_check'], function(){
+    
+    route::get('addProduct',[productController::class,'product']);
+    route::post('addProductPost',[productController::class,'addProductFunction']);
+    route::get('user',function(){
+    
+        return view('adminPages.addUser');
+    });
+    
+    route::post('addUserPost',[testController::class,'addUserFunc']);
+
+
+    
+});
+
+
+
+
+// Route::group(['middleware'=>'admin_auth'],function(){
+// });
